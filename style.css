@@ -1,0 +1,120 @@
+/* Styles généraux */
+body {
+    background-color: rgba(2, 2, 56, 0.877);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.auth-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Style spécifique pour le bouton Google */
+.google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: white;
+    color: #757575;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+/* Style de l'icône Google */
+.google-button img {
+    width: 18px;
+    height: 18px;
+}
+
+/* Effet hover sur le bouton */
+.google-button:hover {
+    background: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Style pour les messages */
+#message {
+    margin-top: 20px;
+    color: #333;
+    font-size: 14px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 0.5rem;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0052a3;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.welcome-container {
+    text-align: center;
+}
+
+.welcome-container h1 {
+    font-size: 4rem;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.connect-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #0066cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.connect-button:hover {
+    background: #0052a3;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
