@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion Google</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- Import du SDK Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -12,13 +12,12 @@
     <div class="auth-container">
         <h1>Connexion</h1>
         <!-- Bouton de connexion Google avec icône -->
-        <button onclick="signInWithGoogle()" class="google-button">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo">
+        <button class="google-button" id="google-signin">
             Se connecter avec Google
         </button>
         <!-- Zone pour afficher les messages de statut -->
         <p id="message"></p>
     </div>
-    <script src="app.js"></script>
+    <script src="../backend/app.js"></script>
 </body>
 </html>

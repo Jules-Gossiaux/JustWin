@@ -1,2 +1,29 @@
+Prochaines étapes
+-Hiérarchisation correcte
+-Bon fonctionnement de l'authentification
+-fichier .env et gitignore
+______________________________________________________________
+COMMENT MERTTRE A JOUR LE DOSSIER SUR UN AUTRE PC A PARTIR DU REPOSITORY
 1. git fetch 
 2. git pull origin main
+___________________________________________________________
+Organisation des fichiers
+
+JustWin/
+│
+├── public/                  # Contient les fichiers HTML et statiques
+│   ├── index.html           # Page d'accueil (connexion)
+│   ├── league.html          # Page des ligues
+│   ├── game.html            # Page du jeu
+│   ├── styles/              # Dossier pour le CSS
+│   └── scripts/             # Dossier pour les fichiers JS
+│   backend/
+        ├── supabaseClient.js # Configuration de Supabase
+│       ├── auth.js          # Gestion de l'authentification
+│       ├── app.js           # Logique principale (si besoin)
+│       ├── league.js        # Logique spécifique à league.html
+│       └── game.js          # Logique spécifique à game.html
+
+│── package.json            # Dépendances et scripts
+│── README.md               # Documentation
+_________________________________________________________________________
