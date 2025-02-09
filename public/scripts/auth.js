@@ -1,4 +1,3 @@
-//Gestion de l'authentifiacation
 import supabase from './supabaseClient.js';
 
 // Fonction pour se connecter avec Google
@@ -19,13 +18,13 @@ async function signInWithGoogle() {
     }
 }
 
-// Vérifier si l'utilisateur est déjà connecté au chargement de la page
-document.addEventListener('DOMContentLoaded', async () => {
+// Fonction pour vérifier la session
+async function checkSession() {
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
         document.getElementById('message').textContent = `Connecté en tant que: ${session.user.email}`;
     }
-});
+}
 
-// Exporter la fonction pour l'utiliser ailleurs si besoin
-export { signInWithGoogle };
+// Exporter les fonctions
+export { signInWithGoogle, checkSession };

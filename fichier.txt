@@ -1,5 +1,5 @@
-Prochaines étapes
--Hiérarchisation correcte
+Prochaines étapes 
+-Hiérarchisation correcte ++++
 -Bon fonctionnement de l'authentification
 -fichier .env et gitignore
 ______________________________________________________________
@@ -8,6 +8,19 @@ COMMENT MERTTRE A JOUR LE DOSSIER SUR UN AUTRE PC A PARTIR DU REPOSITORY
 2. git pull origin main
 ___________________________________________________________
 Organisation des fichiers
+
+
+backend/
+  └── functions/
+      └── app.js  ✅ (Backend : Supabase, API, logique serveur)
+
+public/
+  ├── scripts/
+  │   ├── main.js ✅ (Frontend : initialisation des scripts)
+  │   ├── auth.js (Gère l'authentification)
+  │   ├── supabaseClient.js (Connexion à Supabase)
+  ├── index.html
+
 
 JustWin/
 │
