@@ -15,28 +15,16 @@ backend/
       └── app.js  ✅ (Backend : Supabase, API, logique serveur)
 
 public/
-  ├── scripts/
-  │   ├── main.js ✅ (Frontend : initialisation des scripts)
-  │   ├── auth.js (Gère l'authentification)
-  │   ├── supabaseClient.js (Connexion à Supabase)
-  ├── index.html
+  ├── index.html           # Page d'accueil/connexion
+  ├── pages/              # Nouveau dossier pour les pages HTML
+  │   ├── league.html     # Page des ligues
+  │   ├── game.html      # Page de jeu
+  │   └── profile.html   # Page de profil
+  ├── css/
+  │   └── style.css
+  └── scripts/
+      ├── main.js
+      ├── auth.js
+      └── supabaseClient.js
 
 
-JustWin/
-│
-├── public/                  # Contient les fichiers HTML et statiques
-│   ├── index.html           # Page d'accueil (connexion)
-│   ├── league.html          # Page des ligues
-│   ├── game.html            # Page du jeu
-│   ├── styles/              # Dossier pour le CSS
-│   └── scripts/             # Dossier pour les fichiers JS
-│   backend/
-        ├── supabaseClient.js # Configuration de Supabase
-│       ├── auth.js          # Gestion de l'authentification
-│       ├── app.js           # Logique principale (si besoin)
-│       ├── league.js        # Logique spécifique à league.html
-│       └── game.js          # Logique spécifique à game.html
-
-│── package.json            # Dépendances et scripts
-│── README.md               # Documentation
-_________________________________________________________________________
