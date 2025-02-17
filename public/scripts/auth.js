@@ -24,6 +24,8 @@ async function checkSession() {
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
         document.getElementById('message').textContent = `Connecté en tant que: ${session.user.email}`;
+        //affiche dans la console le même message
+        console.log(`Connecté en tant que: ${session.user.email}`);
     }
 }
 

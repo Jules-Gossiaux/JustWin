@@ -3,22 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion Google</title>
+    <title>Accueil - Jeu de Rectangles</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="data:,">
-    <!-- Import du SDK Supabase -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="icon" href="data:,">
 </head>
 <body>
-    <div class="auth-container">
-        <h1>Connexion</h1>
-        <!-- Bouton de connexion Google avec icône -->
-        <button class="google-button" id="google-signin">
-            Se connecter avec Google
-        </button>
-        <!-- Zone pour afficher les messages de statut -->
-        <p id="message"></p>
-    </div>
     <script type="module" src="scripts/main.js"></script>
+    <header>
+        <div class="profile">
+            <a href="connect.html"><img src="#" alt="" class="profile-pic"></a>
+        </div>
+        <button class="logInButton btn" id="google-signin">se connecter</button>
+        <div class="coins">
+            <div class="coin"></div>
+            <span class="coin-count">100</span>
+        </div>
+    </header>
+    <main>
+        <div class="buttons">
+            <a href="game.html" class="btn play-btn">Jouer</a>
+            <button class="btn">Pièces</button>
+            <button class="btn">Classement</button>
+        </div>
+    </main>
+    <p id="message"></p>
 </body>
 </html>
