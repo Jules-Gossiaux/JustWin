@@ -8,7 +8,8 @@ async function signInWithGoogle() {
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: window.location.origin + '/public/index.html'
+                //redirige l'utilisateur vers la page d'accueil après la connexion
+                redirectTo: "http://localhost:5000/public/index.html",
             }
         });
 
