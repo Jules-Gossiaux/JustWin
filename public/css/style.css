@@ -30,7 +30,13 @@ header {
     padding: 10px;
     margin-left: 10px;
 }
-
+#profile-email{
+    margin-right: auto;
+    height: 15px;
+    width: auto;
+    padding: 10px;
+    margin-left: 10px;
+}
 .coins {
     font-size: 24px;
     display: flex;
@@ -93,4 +99,12 @@ main {
 
 .play-btn:hover {
     background-color: #353438;
+}
+
+.user-email {
+    font-size: 14px;
+    color: #353438;
+    padding: 8px 16px;
+    background-color: #B5B2BC;
+    border-radius: 4px;
 }

@@ -29,5 +29,44 @@ async function checkSession() {
     }
 }
 
+async function handleAuthStateChange(session) {
+    const loginButton = document.getElementById('google-signin');
+    
+    if (session) {
+        // L'utilisateur est connecté
+        const userEmail = session.user.email;
+        
+        // Créer un nouvel élément pour afficher l'email
+        const emailDisplay = document.createElement('span');
+        emailDisplay.className = 'user-email';
+        emailDisplay.id = 'profile-email';
+        emailDisplay.textContent = userEmail;
+        
+        // Remplacer le bouton par l'email
+        loginButton.parentNode.replaceChild(emailDisplay, loginButton);
+    } else {
+        // L'utilisateur est déconnecté
+        const emailDisplay = document.querySelector('.user-email');
+        if (emailDisplay) {
+            // Recréer le bouton de connexion
+            const loginButton = document.createElement('button');
+            loginButton.className = 'logInButton btn';
+            loginButton.id = 'google-signin';
+            loginButton.textContent = 'se connecter';
+            
+            // Remettre le bouton à la place de l'email
+            emailDisplay.parentNode.replaceChild(loginButton, emailDisplay);
+            
+            // Réattacher l'event listener pour la connexion
+            loginButton.addEventListener('click', signInWithGoogle);
+        }
+    }
+}
+
+// Ajouter l'écouteur d'événements pour les changements d'authentification
+supabase.auth.onAuthStateChange((event, session) => {
+    handleAuthStateChange(session);
+});
+
 // Exporter les fonctions
 export { signInWithGoogle, checkSession };
