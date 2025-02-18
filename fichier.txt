@@ -1,7 +1,6 @@
 Prochaines étapes 
--Hiérarchisation correcte ++++
--Bon fonctionnement de l'authentification
--fichier .env et gitignore
+-Importer correctement les clés
+-Créer automatiquement des leagues et les afficher
 ______________________________________________________________
 COMMENT MERTTRE A JOUR LE DOSSIER SUR UN AUTRE PC A PARTIR DU REPOSITORY
 1. git fetch 
