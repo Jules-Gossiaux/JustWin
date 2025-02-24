@@ -8,12 +8,15 @@ ___________________________________________________________
 Organisation des fichiers
 
 
-backend/
+supabase/
   └── functions/
-      └── app.js  ✅ (Backend : Supabase, API, logique serveur)
-
-public/
-  ├── index.html           # Page d'accueil/connexion
+      └──.temp
+          └── cli-latest.txt
+      └── create-league
+          └── .npmrc
+          └── deno.json
+          └── index.ts
+src/       
   ├── pages/              # Nouveau dossier pour les pages HTML
   │   ├── league.html     # Page des ligues
   │   ├── game.html      # Page de jeu
@@ -24,5 +27,21 @@ public/
       ├── main.js
       ├── auth.js
       └── supabaseClient.js
+index.html  # Page d'accueil/connexion
+package-lock.json
+package.json
+README.md
+.gitignore
+fichier.txt
+.env
+.env.example
 
-
+Pour lancer manuellement l'edge function avec Deno: deno run --allow-net --allow-env supabase/functions/create-league/index.ts
+Pour la lancer automatiquement: 
+📌 Ajoute dans "scripts" :
+json
+"scripts": {
+  "start-cron": "deno run --allow-net --allow-env supabase/functions/create-league/index.ts"
+}
+Ensuite, pour exécuter automatiquement :
+npm run start-cron

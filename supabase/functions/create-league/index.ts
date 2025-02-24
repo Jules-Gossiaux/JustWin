@@ -3,85 +3,87 @@
 // Cela permet d'activer l'autocomplétion, la navigation vers la définition, etc.
 
 // Import des modules nécessaires
-import "jsr:@supabase/functions-js/edge-runtime.d.ts"  // Définitions de types pour l'environnement Edge Functions
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";  // Module Deno pour créer un serveur HTTP
-import { createClient } from "https://esm.sh/@supabase/supabase-js";  // Client Supabase
+import "https://deno.land/x/xhr@0.3.0/mod.ts";
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-// Définition de l'interface League qui décrit la structure d'une ligue
+// Récupération des variables d'environnement
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+// Interface pour la structure d'une ligue
 interface League {
-  dateDebut: string;      // Date de début de la ligue au format ISO
-  dateFin: string;        // Date de fin de la ligue au format ISO
-  joueurs: any[];         // Tableau des joueurs participants
-  buyIn: number;          // Montant d'entrée pour participer
-  classement: any[];      // Tableau du classement des joueurs
-  type: 'vitesse' | 'precision' | 'endurance';  // Type de ligue avec valeurs spécifiques
-  statut: 'en_attente' | 'en_cours' | 'terminee';  // État actuel de la ligue
+  dateDebut: string;
+  dateFin: string;
+  joueurs: any[];
+  buyIn: number;
+  classement: any[];
+  type: "vitesse" | "precision" | "endurance";
+  statut: "en_attente" | "en_cours" | "terminee";
 }
 
-// Fonction qui retourne aléatoirement un type de ligue
-const determinerTypeLeague = (): League['type'] => {
-  const types: League['type'][] = ['vitesse', 'precision', 'endurance'];
+// Fonction pour choisir un type de ligue au hasard
+const determinerTypeLeague = (): League["type"] => {
+  const types: League["type"][] = ["vitesse", "precision", "endurance"];
   return types[Math.floor(Math.random() * types.length)];
 };
 
-// Fonction qui retourne aléatoirement un montant de buy-in
+// Fonction pour choisir un buy-in aléatoire
 const determinerBuyIn = (): number => {
   const buyIns = [100, 200, 500, 1000];
   return buyIns[Math.floor(Math.random() * buyIns.length)];
 };
 
-// Point d'entrée de l'Edge Function
+// Serveur qui écoute les requêtes HTTP
 serve(async (req) => {
   // Vérification de l'authentification
-  const authHeader = req.headers.get('Authorization')
-  if (!authHeader || !authHeader.includes(Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '')) {
-    return new Response(
-      JSON.stringify({ error: 'Non autorisé' }),
-      { status: 401, headers: { 'Content-Type': 'application/json' } }
-    )
+  const authHeader = req.headers.get("Authorization");
+  if (!authHeader || authHeader !== `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`) {
+    return new Response(JSON.stringify({ error: "Non autorisé" }), {
+      status: 401,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   try {
-    // Création d'une instance du client Supabase avec les variables d'environnement
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? ''
-    )
-    
-    // Création d'une nouvelle ligue
+    console.log("Création d'une nouvelle ligue...");
+
+    // Initialisation du client Supabase
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+    // Définition de la nouvelle ligue
     const maintenant = new Date();
     const nouvelleLeague: League = {
-      dateDebut: maintenant.toISOString(),  // Date actuelle
-      dateFin: new Date(maintenant.getTime() + 60 * 60 * 1000).toISOString(),  // Date actuelle + 1 heure
-      joueurs: [],  // Tableau vide initial
-      buyIn: determinerBuyIn(),  // Montant aléatoire
-      classement: [],  // Tableau vide initial
-      type: determinerTypeLeague(),  // Type aléatoire
-      statut: 'en_attente'  // Statut initial
+      dateDebut: maintenant.toISOString(),
+      dateFin: new Date(maintenant.getTime() + 60 * 60 * 1000).toISOString(), // +1h
+      joueurs: [],
+      buyIn: determinerBuyIn(),
+      classement: [],
+      type: determinerTypeLeague(),
+      statut: "en_attente",
     };
 
-    // Insertion de la nouvelle ligue dans la base de données
-    const { data, error } = await supabase
-      .from('leagues')
-      .insert([nouvelleLeague])
-      .select();
+    // Insertion dans la base de données Supabase
+    const { data, error } = await supabase.from("leagues").insert([nouvelleLeague]).select();
 
-    // Gestion des erreurs de base de données
     if (error) throw error;
 
-    // Retour d'une réponse réussie
+    console.log("Ligue créée avec succès :", data);
+
     return new Response(
-      JSON.stringify({ message: 'League créée avec succès', data }),
-      { headers: { 'Content-Type': 'application/json' } }
-    )
+      JSON.stringify({ message: "Ligue créée avec succès", data }),
+      { headers: { "Content-Type": "application/json" } }
+    );
   } catch (error) {
-    // Gestion des erreurs générales
+    console.error("Erreur lors de la création de la ligue :", error.message);
+
     return new Response(
       JSON.stringify({ error: error.message }),
-      { headers: { 'Content-Type': 'application/json' }, status: 400 }
-    )
+      { headers: { "Content-Type": "application/json" }, status: 400 }
+    );
   }
-})
+});
+
 
 
 /* Pour invoquer localement :
